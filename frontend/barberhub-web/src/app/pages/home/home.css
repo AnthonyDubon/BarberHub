@@ -1,0 +1,578 @@
+:host {
+  display: block;
+  min-height: 100vh;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  color: #111827;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  background-color: #ffffff;
+
+  border-bottom:
+    1px solid #e5e7eb;
+}
+
+
+nav {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+  padding: 18px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+}
+
+
+.logo {
+  color: #0b2a5b;
+
+  font-size: 24px;
+  font-weight: 800;
+
+  text-decoration: none;
+}
+
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+
+.nav-links a {
+  color: #374151;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+
+.nav-links a:hover {
+  color: #c8102e;
+}
+
+
+/* =========================
+   BOTONES
+========================= */
+
+button {
+  border: none;
+  border-radius: 7px;
+
+  padding: 12px 22px;
+
+  background-color: #c8102e;
+  color: #ffffff;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+button:hover {
+  background-color: #a90d27;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+#inicio {
+  min-height: 360px;
+
+  padding: 50px 24px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  text-align: center;
+
+  background-color: #f8fafc;
+}
+
+
+.hero-label {
+  display: inline-block;
+
+  margin-bottom: 18px;
+
+  color: #c8102e;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  letter-spacing: 3px;
+}
+
+
+#inicio h1 {
+  width: 100%;
+  max-width: 850px;
+
+  margin: 0;
+
+  color: #0b2a5b;
+
+  font-size: 64px;
+  font-weight: 800;
+
+  line-height: 1.08;
+
+  letter-spacing: -2px;
+}
+
+
+#inicio p {
+  width: 100%;
+  max-width: 650px;
+
+  margin: 26px 0 30px;
+
+  color: #4b5563;
+
+  font-size: 20px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================
+   ETIQUETAS
+========================= */
+
+.section-label,
+.contact-label {
+  display: inline-block;
+
+  margin-bottom: 12px;
+
+  color: #c8102e;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+}
+
+
+/* =========================
+   SERVICIOS
+========================= */
+
+#servicios {
+  max-width: 1200px;
+
+  margin: 0 auto;
+  padding: 90px 24px;
+
+  box-sizing: border-box;
+
+  text-align: center;
+}
+
+
+#servicios h2 {
+  margin: 0;
+
+  color: #0b2a5b;
+
+  font-size: 38px;
+
+  line-height: 1.2;
+}
+
+
+#servicios > p {
+  margin: 16px 0 42px;
+
+  color: #4b5563;
+
+  line-height: 1.6;
+}
+
+
+.services-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 24px;
+}
+
+
+/* =========================
+   TARJETAS SERVICIOS
+========================= */
+
+.service-card {
+  padding: 18px;
+
+  text-align: left;
+
+  background-color: #ffffff;
+
+  border:
+    1px solid #dbe2ea;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 4px 14px
+    rgba(0, 0, 0, 0.07);
+}
+
+
+.service-card mat-card-title {
+  color: #0b2a5b;
+
+  font-weight: 700;
+}
+
+
+.service-card p {
+  color: #4b5563;
+
+  line-height: 1.5;
+}
+
+
+.price {
+  color: #c8102e;
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+
+.service-card mat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #c8102e;
+
+  background-color: #fce8ec;
+}
+
+
+/* =========================
+   BARBEROS
+========================= */
+
+#barberos {
+  padding: 90px 24px;
+
+  box-sizing: border-box;
+
+  text-align: center;
+
+  background-color: #f8fafc;
+}
+
+
+#barberos h2 {
+  margin: 0;
+
+  color: #0b2a5b;
+
+  font-size: 38px;
+
+  line-height: 1.2;
+}
+
+
+#barberos > p {
+  margin: 16px 0 42px;
+
+  color: #4b5563;
+
+  line-height: 1.6;
+}
+
+
+.barbers-grid {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 24px;
+}
+
+
+.barber-card {
+  padding: 18px;
+
+  text-align: left;
+
+  background-color: #ffffff;
+
+  border:
+    1px solid #dbe2ea;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 4px 14px
+    rgba(0, 0, 0, 0.07);
+}
+
+
+.barber-card mat-card-title {
+  color: #0b2a5b;
+
+  font-weight: 700;
+}
+
+
+.barber-card mat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #0b2a5b;
+
+  background-color: #e8eef7;
+}
+
+
+.barber-card p {
+  color: #4b5563;
+
+  line-height: 1.5;
+}
+
+
+/* =========================
+   CONTACTO
+========================= */
+
+#contacto {
+  padding: 90px 24px;
+
+  box-sizing: border-box;
+
+  background-color: #0b2a5b;
+
+  color: #ffffff;
+}
+
+
+.contact-content {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 60px;
+}
+
+
+.contact-label {
+  color: #ffffff;
+
+  opacity: 0.75;
+}
+
+
+#contacto h2 {
+  max-width: 600px;
+
+  margin: 0 0 16px;
+
+  font-size: 38px;
+
+  line-height: 1.2;
+}
+
+
+#contacto p {
+  line-height: 1.6;
+}
+
+
+.contact-info {
+  min-width: 280px;
+}
+
+
+.contact-info p {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+
+.contact-info mat-icon {
+  color: #ffffff;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+  .nav-links {
+    display: none;
+  }
+
+
+  #inicio {
+    min-height: 540px;
+
+    padding:
+      70px
+      24px;
+  }
+
+
+  #inicio h1 {
+    max-width: 650px;
+
+    font-size: 48px;
+
+    letter-spacing: -1px;
+  }
+
+
+  .services-grid,
+  .barbers-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+
+  .contact-content {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  nav {
+    padding: 14px 18px;
+  }
+
+
+  .logo {
+    font-size: 21px;
+  }
+
+
+  nav > button {
+    padding: 10px 14px;
+
+    font-size: 13px;
+  }
+
+
+  #inicio {
+    min-height: 500px;
+
+    padding:
+      60px
+      20px;
+  }
+
+
+  .hero-label {
+    margin-bottom: 14px;
+
+    font-size: 11px;
+  }
+
+
+  #inicio h1 {
+    font-size: 40px;
+
+    line-height: 1.1;
+  }
+
+
+  #inicio p {
+    margin:
+      22px
+      0
+      26px;
+
+    font-size: 17px;
+  }
+
+
+  #servicios,
+  #barberos,
+  #contacto {
+    padding:
+      65px
+      20px;
+  }
+
+
+  #servicios h2,
+  #barberos h2,
+  #contacto h2 {
+    font-size: 32px;
+  }
+
+
+  .services-grid,
+  .barbers-grid {
+    grid-template-columns: 1fr;
+  }
+
+}

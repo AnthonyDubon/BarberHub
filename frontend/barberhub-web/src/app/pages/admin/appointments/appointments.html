@@ -1,0 +1,258 @@
+<div class="admin-layout">
+
+  <aside class="sidebar">
+
+    <div class="brand">
+
+      <mat-icon>content_cut</mat-icon>
+
+      <div>
+        <strong>BarberHub</strong>
+        <span>Administración</span>
+      </div>
+
+    </div>
+
+    <nav>
+
+      <a routerLink="/admin">
+        <mat-icon>dashboard</mat-icon>
+        Dashboard
+      </a>
+
+      <a
+        routerLink="/admin/citas"
+        class="active"
+      >
+        <mat-icon>calendar_month</mat-icon>
+        Citas
+      </a>
+
+     <a routerLink="/admin/servicios">
+  <mat-icon>content_cut</mat-icon>
+  Servicios
+</a>
+
+<a routerLink="/admin/barberos">
+  <mat-icon>person</mat-icon>
+  Barberos
+</a>
+
+      <a>
+        <mat-icon>group</mat-icon>
+        Empleados
+      </a>
+
+    </nav>
+
+    <div class="sidebar-footer">
+
+      <a routerLink="/">
+        <mat-icon>storefront</mat-icon>
+        Ver BarberHub
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <main class="admin-content">
+
+    <header class="page-header">
+
+      <div>
+        <h1>Citas</h1>
+
+        <p>
+          Administra las solicitudes de tus clientes.
+        </p>
+      </div>
+
+      <button
+        matButton="filled"
+        (click)="loadAppointments()"
+      >
+        <mat-icon>refresh</mat-icon>
+        Actualizar
+      </button>
+
+    </header>
+
+
+    @if (errorMessage) {
+
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
+
+    }
+
+
+    @if (loading) {
+
+      <div class="loading">
+        Cargando citas...
+      </div>
+
+    } @else if (appointments.length === 0) {
+
+      <div class="empty-state">
+
+        <mat-icon>event_busy</mat-icon>
+
+        <h2>No hay citas registradas</h2>
+
+        <p>
+          Cuando un cliente reserve aparecerá aquí.
+        </p>
+
+      </div>
+
+    } @else {
+
+      <div class="appointments-card">
+
+        <div class="table-wrapper">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Cliente</th>
+                <th>Servicio</th>
+                <th>Barbero</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              @for (
+                appointment of appointments;
+                track appointment.id
+              ) {
+
+                <tr>
+
+                  <td>
+
+                    <div class="client">
+
+                      <strong>
+                        {{ appointment.clientName }}
+                      </strong>
+
+                      <span>
+                        {{ appointment.clientPhone }}
+                      </span>
+
+                    </div>
+
+                  </td>
+
+
+                  <td>
+                    {{ appointment.serviceId }}
+                  </td>
+
+
+                  <td>
+                    {{ appointment.barberId }}
+                  </td>
+
+
+                  <td>
+
+                    <div class="date">
+
+                      <strong>
+                        {{ appointment.appointmentDate | date:'dd/MM/yyyy' }}
+                      </strong>
+
+                      <span>
+                        {{ appointment.appointmentDate | date:'hh:mm a' }}
+                      </span>
+
+                    </div>
+
+                  </td>
+
+
+                  <td>
+
+                    <span
+                      class="status"
+                      [class.pending]="appointment.status?.toLowerCase() === 'pending'"
+                      [class.confirmed]="appointment.status?.toLowerCase() === 'confirmed'"
+                      [class.rejected]="appointment.status?.toLowerCase() === 'rejected'"
+                    >
+                      {{ appointment.status }}
+                    </span>
+
+                  </td>
+
+
+                  <td>
+
+                    @if (
+                      appointment.status?.toLowerCase()
+                      === 'pending'
+                    ) {
+
+                      <div class="actions">
+
+                        <button
+                          matButton="filled"
+                          class="confirm-button"
+                          [disabled]="actionAppointmentId === appointment.id"
+                          (click)="confirmAppointment(appointment.id)"
+                        >
+                          <mat-icon>check</mat-icon>
+                          Confirmar
+                        </button>
+
+
+                        <button
+                          matButton="outlined"
+                          class="reject-button"
+                          [disabled]="actionAppointmentId === appointment.id"
+                          (click)="rejectAppointment(appointment.id)"
+                        >
+                          <mat-icon>close</mat-icon>
+                          Rechazar
+                        </button>
+
+                      </div>
+
+                    } @else {
+
+                      <span class="completed-action">
+                        Gestionada
+                      </span>
+
+                    }
+
+                  </td>
+
+                </tr>
+
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    }
+
+  </main>
+
+</div>

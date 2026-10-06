@@ -1,0 +1,255 @@
+<main class="booking-page">
+
+  <div class="booking-container">
+
+    <div class="booking-header">
+
+      <span class="booking-label">
+        BARBERHUB
+      </span>
+
+      <h1>Reserva tu cita</h1>
+
+      <p>
+        Elige tu servicio, barbero y horario.
+        Nosotros nos encargamos del resto.
+      </p>
+
+    </div>
+
+    <!-- MENSAJE DE ÉXITO -->
+    @if (successMessage) {
+      <div class="message success-message">
+        <mat-icon>check_circle</mat-icon>
+
+        <div>
+          <strong>Reserva recibida</strong>
+          <p>{{ successMessage }}</p>
+        </div>
+      </div>
+    }
+
+    <!-- MENSAJE DE ERROR -->
+    @if (errorMessage) {
+      <div class="message error-message">
+        <mat-icon>error</mat-icon>
+
+        <div>
+          <strong>Ocurrió un problema</strong>
+          <p>{{ errorMessage }}</p>
+        </div>
+      </div>
+    }
+
+    <form
+      class="booking-form"
+      [formGroup]="bookingForm"
+      (ngSubmit)="onSubmit()"
+    >
+
+      <div class="form-section">
+
+        <h2>Tus datos</h2>
+
+        <div class="form-grid">
+
+          <!-- NOMBRE -->
+          <mat-form-field appearance="outline">
+
+            <mat-label>Nombre</mat-label>
+
+            <input
+              matInput
+              type="text"
+              formControlName="name"
+              placeholder="Tu nombre"
+            >
+
+            @if (bookingForm.controls.name.hasError('required')) {
+              <mat-error>
+                El nombre es obligatorio.
+              </mat-error>
+            }
+
+            @if (bookingForm.controls.name.hasError('minlength')) {
+              <mat-error>
+                El nombre debe tener al menos 2 caracteres.
+              </mat-error>
+            }
+
+          </mat-form-field>
+
+          <!-- TELÉFONO -->
+          <mat-form-field appearance="outline">
+
+            <mat-label>Teléfono</mat-label>
+
+            <input
+              matInput
+              type="tel"
+              formControlName="phone"
+              placeholder="Ej. 99999999"
+            >
+
+            @if (bookingForm.controls.phone.hasError('required')) {
+              <mat-error>
+                El teléfono es obligatorio.
+              </mat-error>
+            }
+
+            @if (bookingForm.controls.phone.hasError('pattern')) {
+              <mat-error>
+                Ingresa un teléfono válido de 8 dígitos.
+              </mat-error>
+            }
+
+          </mat-form-field>
+
+        </div>
+
+      </div>
+
+      <div class="form-section">
+
+        <h2>Elige tu servicio</h2>
+
+        <!-- SERVICIO -->
+        <mat-form-field appearance="outline">
+
+          <mat-label>Servicio</mat-label>
+
+          <mat-select formControlName="service">
+
+            @for (service of services; track service.id) {
+
+              <mat-option [value]="service.id">
+                {{ service.name }} — L {{ service.price }}
+              </mat-option>
+
+            }
+
+          </mat-select>
+
+          @if (bookingForm.controls.service.hasError('required')) {
+            <mat-error>
+              Debes seleccionar un servicio.
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+        <!-- BARBERO -->
+        <mat-form-field appearance="outline">
+
+          <mat-label>Barbero</mat-label>
+
+          <mat-select
+            formControlName="barber"
+            (selectionChange)="updateAvailableTimes()"
+          >
+
+            @for (barber of barbers; track barber.id) {
+
+              <mat-option [value]="barber.id">
+                {{ barber.name }}
+              </mat-option>
+
+            }
+
+          </mat-select>
+
+          @if (bookingForm.controls.barber.hasError('required')) {
+            <mat-error>
+              Debes seleccionar un barbero.
+            </mat-error>
+          }
+
+        </mat-form-field>
+
+      </div>
+
+      <div class="form-section">
+
+        <h2>Fecha y hora</h2>
+
+        <div class="form-grid">
+
+          <!-- FECHA -->
+          <mat-form-field appearance="outline">
+
+            <mat-label>Fecha</mat-label>
+
+            <input
+              matInput
+              type="date"
+              formControlName="date"
+              [min]="today"
+              (change)="updateAvailableTimes()"
+            >
+
+            @if (bookingForm.controls.date.hasError('required')) {
+              <mat-error>
+                Debes seleccionar una fecha.
+              </mat-error>
+            }
+
+          </mat-form-field>
+
+          <!-- HORA -->
+          <mat-form-field appearance="outline">
+
+            <mat-label>Hora</mat-label>
+
+            <mat-select
+              formControlName="time"
+              [disabled]="availableTimes.length === 0"
+            >
+
+              @for (time of availableTimes; track time) {
+
+                <mat-option [value]="time">
+                  {{ time }}
+                </mat-option>
+
+              }
+
+            </mat-select>
+
+            @if (bookingForm.controls.time.hasError('required')) {
+              <mat-error>
+                Debes seleccionar una hora.
+              </mat-error>
+            }
+
+          </mat-form-field>
+
+        </div>
+
+        @if (availableTimes.length === 0) {
+          <p class="time-help">
+            Selecciona un barbero y una fecha para ver los horarios disponibles.
+          </p>
+        }
+
+      </div>
+
+      <button
+        matButton="filled"
+        class="submit-button"
+        type="submit"
+        [disabled]="isSubmitting"
+      >
+
+        @if (isSubmitting) {
+          Enviando...
+        } @else {
+          Confirmar cita
+        }
+
+      </button>
+
+    </form>
+
+  </div>
+
+</main>

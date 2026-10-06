@@ -1,0 +1,305 @@
+<div class="admin-layout">
+
+  <aside class="sidebar">
+
+    <div class="brand">
+      <mat-icon>content_cut</mat-icon>
+
+      <div>
+        <strong>BarberHub</strong>
+        <span>Administración</span>
+      </div>
+    </div>
+
+    <nav>
+
+      <a routerLink="/admin">
+        <mat-icon>dashboard</mat-icon>
+        Dashboard
+      </a>
+
+      <a routerLink="/admin/citas">
+        <mat-icon>calendar_month</mat-icon>
+        Citas
+      </a>
+
+      <a routerLink="/admin/servicios">
+        <mat-icon>content_cut</mat-icon>
+        Servicios
+      </a>
+
+      <a
+        routerLink="/admin/barberos"
+        class="active"
+      >
+        <mat-icon>person</mat-icon>
+        Barberos
+      </a>
+
+    </nav>
+
+
+    <div class="sidebar-footer">
+
+      <button
+        type="button"
+        class="logout-button"
+        (click)="logout()"
+      >
+        <mat-icon>logout</mat-icon>
+        Cerrar sesión
+      </button>
+
+      <a routerLink="/">
+        <mat-icon>storefront</mat-icon>
+        Ver BarberHub
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <main class="admin-content">
+
+    <header class="page-header">
+
+      <div>
+        <h1>Barberos</h1>
+
+        <p>
+          Administra el equipo de tu barbería.
+        </p>
+      </div>
+
+    </header>
+
+
+    @if (successMessage) {
+
+      <div class="message success">
+        {{ successMessage }}
+      </div>
+
+    }
+
+
+    @if (errorMessage) {
+
+      <div class="message error">
+        {{ errorMessage }}
+      </div>
+
+    }
+
+
+    <section class="form-card">
+
+      <h2>
+        {{
+          editingBarber
+            ? 'Editar barbero'
+            : 'Nuevo barbero'
+        }}
+      </h2>
+
+
+      <form
+        [formGroup]="barberForm"
+        (ngSubmit)="saveBarber()"
+      >
+
+        <div class="form-grid">
+
+          <mat-form-field appearance="outline">
+
+            <mat-label>
+              Nombre
+            </mat-label>
+
+            <input
+              matInput
+              formControlName="name"
+              placeholder="Nombre del barbero"
+            >
+
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline">
+
+            <mat-label>
+              Especialidad
+            </mat-label>
+
+            <input
+              matInput
+              formControlName="specialty"
+              placeholder="Ej. Degradados y barba"
+            >
+
+          </mat-form-field>
+
+        </div>
+
+
+        <div class="form-actions">
+
+          @if (editingBarber) {
+
+            <button
+              matButton="outlined"
+              type="button"
+              (click)="cancelEdit()"
+            >
+              Cancelar
+            </button>
+
+          }
+
+
+          <button
+            matButton="filled"
+            type="submit"
+            [disabled]="saving"
+          >
+
+            <mat-icon>
+              {{
+                editingBarber
+                  ? 'save'
+                  : 'person_add'
+              }}
+            </mat-icon>
+
+            {{
+              saving
+                ? 'Guardando...'
+                : editingBarber
+                  ? 'Guardar cambios'
+                  : 'Agregar barbero'
+            }}
+
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+
+    <section class="list-card">
+
+      <h2>
+        Barberos registrados
+      </h2>
+
+
+      @if (loading) {
+
+        <div class="loading">
+          Cargando barberos...
+        </div>
+
+      } @else {
+
+        <div class="barber-list">
+
+          @for (
+            barber of barbers;
+            track barber.id
+          ) {
+
+            <article class="barber-item">
+
+              <div class="barber-main">
+
+                <div class="avatar">
+                  {{
+                    barber.name
+                      .charAt(0)
+                      .toUpperCase()
+                  }}
+                </div>
+
+                <div>
+
+                  <strong>
+                    {{ barber.name }}
+                  </strong>
+
+                  <span>
+                    {{ barber.specialty }}
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <span
+                class="status"
+                [class.active]="barber.active"
+                [class.inactive]="!barber.active"
+              >
+                {{
+                  barber.active
+                    ? 'Activo'
+                    : 'Inactivo'
+                }}
+              </span>
+
+
+              <div class="actions">
+
+                <button
+                  matButton="outlined"
+                  type="button"
+                  (click)="editBarber(barber)"
+                >
+                  <mat-icon>
+                    edit
+                  </mat-icon>
+
+                  Editar
+                </button>
+
+
+                <button
+                  matButton="outlined"
+                  type="button"
+                  (click)="toggleBarber(barber)"
+                >
+
+                  <mat-icon>
+                    {{
+                      barber.active
+                        ? 'visibility_off'
+                        : 'visibility'
+                    }}
+                  </mat-icon>
+
+                  {{
+                    barber.active
+                      ? 'Desactivar'
+                      : 'Activar'
+                  }}
+
+                </button>
+
+              </div>
+
+            </article>
+
+          }
+
+        </div>
+
+      }
+
+    </section>
+
+  </main>
+
+</div>

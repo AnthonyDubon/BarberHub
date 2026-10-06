@@ -1,0 +1,288 @@
+<div class="admin-layout">
+
+  <aside class="sidebar">
+
+    <div class="brand">
+      <mat-icon>content_cut</mat-icon>
+
+      <div>
+        <strong>BarberHub</strong>
+        <span>Administración</span>
+      </div>
+    </div>
+
+    <nav>
+
+      <a
+        routerLink="/admin"
+        class="active"
+      >
+        <mat-icon>dashboard</mat-icon>
+        Dashboard
+      </a>
+
+      <a routerLink="/admin/citas">
+        <mat-icon>calendar_month</mat-icon>
+        Citas
+      </a>
+
+      <a routerLink="/admin/servicios">
+        <mat-icon>content_cut</mat-icon>
+        Servicios
+      </a>
+
+      <a routerLink="/admin/barberos">
+        <mat-icon>person</mat-icon>
+        Barberos
+      </a>
+
+      <a>
+        <mat-icon>group</mat-icon>
+        Empleados
+      </a>
+
+    </nav>
+
+    <div class="sidebar-footer">
+
+      <a routerLink="/">
+        <mat-icon>storefront</mat-icon>
+        Ver BarberHub
+      </a>
+
+    </div>
+
+  </aside>
+
+
+  <main class="admin-content">
+
+    <header class="admin-header">
+
+      <div>
+        <h1>Dashboard</h1>
+        <p>Resumen general de BarberHub</p>
+      </div>
+
+      <div class="admin-user">
+
+        <mat-icon>account_circle</mat-icon>
+
+        <div>
+          <strong>Administrador</strong>
+          <span>BarberHub</span>
+        </div>
+
+      </div>
+
+    </header>
+
+
+    @if (loading) {
+
+      <div class="loading">
+        Cargando información...
+      </div>
+
+    } @else {
+
+      <!-- ESTADÍSTICAS -->
+
+      <section class="stats-grid">
+
+        <article class="stat-card">
+
+          <div class="stat-icon total">
+            <mat-icon>calendar_month</mat-icon>
+          </div>
+
+          <div>
+            <span>Total de citas</span>
+            <strong>{{ totalAppointments }}</strong>
+          </div>
+
+        </article>
+
+
+        <article class="stat-card">
+
+          <div class="stat-icon pending">
+            <mat-icon>schedule</mat-icon>
+          </div>
+
+          <div>
+            <span>Pendientes</span>
+            <strong>{{ pendingAppointments }}</strong>
+          </div>
+
+        </article>
+
+
+        <article class="stat-card">
+
+          <div class="stat-icon confirmed">
+            <mat-icon>check_circle</mat-icon>
+          </div>
+
+          <div>
+            <span>Confirmadas</span>
+            <strong>{{ confirmedAppointments }}</strong>
+          </div>
+
+        </article>
+
+
+        <article class="stat-card">
+
+          <div class="stat-icon rejected">
+            <mat-icon>cancel</mat-icon>
+          </div>
+
+          <div>
+            <span>Rechazadas</span>
+            <strong>{{ rejectedAppointments }}</strong>
+          </div>
+
+        </article>
+
+      </section>
+
+
+      <!-- CITAS RECIENTES -->
+
+      <section class="dashboard-section">
+
+        <div class="section-header">
+
+          <div>
+
+            <h2>Gestión de citas</h2>
+
+            <p>
+              Revisa las solicitudes realizadas por tus clientes.
+            </p>
+
+          </div>
+
+
+          <a
+            routerLink="/admin/citas"
+            class="primary-link"
+          >
+            Ver todas las citas
+          </a>
+
+        </div>
+
+
+        @if (appointments.length === 0) {
+
+          <div class="empty-state">
+
+            <mat-icon>event_busy</mat-icon>
+
+            <h3>No hay citas</h3>
+
+            <p>
+              Las nuevas reservas aparecerán aquí.
+            </p>
+
+          </div>
+
+        } @else {
+
+          <div class="recent-list">
+
+            @for (
+              appointment of appointments.slice(0, 5);
+              track appointment.id
+            ) {
+
+              <div class="recent-appointment">
+
+
+                <!-- CLIENTE -->
+
+                <div class="appointment-client">
+
+                  <div class="avatar">
+
+                    {{ appointment.clientName.charAt(0).toUpperCase() }}
+
+                  </div>
+
+                  <div>
+
+                    <strong>
+                      {{ appointment.clientName }}
+                    </strong>
+
+                    <span>
+                      {{ appointment.clientPhone }}
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+                <!-- SERVICIO Y BARBERO -->
+
+                <div class="appointment-info">
+
+                  <span>
+                    {{ getServiceName(appointment.serviceId) }}
+                  </span>
+
+                  <small>
+                    Barbero:
+                    {{ getBarberName(appointment.barberId) }}
+                  </small>
+
+                </div>
+
+
+                <!-- ESTADO -->
+
+                <div
+                  class="status"
+                  [class.pending]="appointment.status?.toLowerCase() === 'pending'"
+                  [class.confirmed]="appointment.status?.toLowerCase() === 'confirmed'"
+                  [class.rejected]="appointment.status?.toLowerCase() === 'rejected'"
+                >
+
+                  @if (
+                    appointment.status?.toLowerCase() === 'pending'
+                  ) {
+                    Pendiente
+                  }
+
+                  @if (
+                    appointment.status?.toLowerCase() === 'confirmed'
+                  ) {
+                    Confirmada
+                  }
+
+                  @if (
+                    appointment.status?.toLowerCase() === 'rejected'
+                  ) {
+                    Rechazada
+                  }
+
+                </div>
+
+              </div>
+
+            }
+
+          </div>
+
+        }
+
+      </section>
+
+    }
+
+  </main>
+
+</div>

@@ -1,0 +1,272 @@
+<div class="admin-layout">
+
+  <aside class="sidebar">
+
+    <div class="brand">
+      <mat-icon>content_cut</mat-icon>
+
+      <div>
+        <strong>BarberHub</strong>
+        <span>Administración</span>
+      </div>
+    </div>
+
+    <nav>
+
+      <a routerLink="/admin">
+        <mat-icon>dashboard</mat-icon>
+        Dashboard
+      </a>
+
+      <a routerLink="/admin/citas">
+        <mat-icon>calendar_month</mat-icon>
+        Citas
+      </a>
+
+      <a
+        routerLink="/admin/servicios"
+        class="active"
+      >
+        <mat-icon>content_cut</mat-icon>
+        Servicios
+      </a>
+
+      <a routerLink="/admin/barberos">
+        <mat-icon>person</mat-icon>
+        Barberos
+      </a>
+
+    </nav>
+
+    <div class="sidebar-footer">
+      <a routerLink="/">
+        <mat-icon>storefront</mat-icon>
+        Ver BarberHub
+      </a>
+    </div>
+
+  </aside>
+
+
+  <main class="admin-content">
+
+    <header class="page-header">
+
+      <div>
+        <h1>Servicios</h1>
+
+        <p>
+          Administra los servicios disponibles
+          para tus clientes.
+        </p>
+      </div>
+
+    </header>
+
+
+    @if (successMessage) {
+      <div class="message success">
+        {{ successMessage }}
+      </div>
+    }
+
+    @if (errorMessage) {
+      <div class="message error">
+        {{ errorMessage }}
+      </div>
+    }
+
+
+    <section class="form-card">
+
+      <h2>
+        {{ editingService ? 'Editar servicio' : 'Nuevo servicio' }}
+      </h2>
+
+      <form
+        [formGroup]="serviceForm"
+        (ngSubmit)="saveService()"
+      >
+
+        <div class="form-grid">
+
+          <mat-form-field appearance="outline">
+
+            <mat-label>Nombre</mat-label>
+
+            <input
+              matInput
+              formControlName="name"
+              placeholder="Ej. Corte de cabello"
+            >
+
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline">
+
+            <mat-label>Precio</mat-label>
+
+            <input
+              matInput
+              type="number"
+              formControlName="price"
+            >
+
+            <span matTextPrefix>L&nbsp;</span>
+
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline">
+
+            <mat-label>Duración</mat-label>
+
+            <input
+              matInput
+              type="number"
+              formControlName="durationMinutes"
+            >
+
+            <span matTextSuffix>min</span>
+
+          </mat-form-field>
+
+        </div>
+
+
+        <div class="form-actions">
+
+          @if (editingService) {
+
+            <button
+              matButton="outlined"
+              type="button"
+              (click)="cancelEdit()"
+            >
+              Cancelar
+            </button>
+
+          }
+
+          <button
+            matButton="filled"
+            type="submit"
+            [disabled]="saving"
+          >
+            <mat-icon>
+              {{ editingService ? 'save' : 'add' }}
+            </mat-icon>
+
+            {{ saving
+              ? 'Guardando...'
+              : editingService
+                ? 'Guardar cambios'
+                : 'Agregar servicio'
+            }}
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+
+    <section class="list-card">
+
+      <div class="list-header">
+
+        <div>
+          <h2>Servicios registrados</h2>
+          <p>{{ services.length }} servicios</p>
+        </div>
+
+      </div>
+
+
+      @if (loading) {
+
+        <div class="loading">
+          Cargando servicios...
+        </div>
+
+      } @else {
+
+        <div class="service-list">
+
+          @for (service of services; track service.id) {
+
+            <article class="service-item">
+
+              <div class="service-main">
+
+                <div class="service-icon">
+                  <mat-icon>content_cut</mat-icon>
+                </div>
+
+                <div>
+
+                  <strong>
+                    {{ service.name }}
+                  </strong>
+
+                  <span>
+                    {{ service.durationMinutes }} minutos
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="price">
+                L {{ service.price }}
+              </div>
+
+
+              <span
+                class="status"
+                [class.active]="service.active"
+                [class.inactive]="!service.active"
+              >
+                {{ service.active ? 'Activo' : 'Inactivo' }}
+              </span>
+
+
+              <div class="actions">
+
+                <button
+                  matButton="outlined"
+                  (click)="editService(service)"
+                >
+                  <mat-icon>edit</mat-icon>
+                  Editar
+                </button>
+
+                <button
+                  matButton="outlined"
+                  (click)="toggleService(service)"
+                >
+                  <mat-icon>
+                    {{ service.active ? 'visibility_off' : 'visibility' }}
+                  </mat-icon>
+
+                  {{ service.active ? 'Desactivar' : 'Activar' }}
+                </button>
+
+              </div>
+
+            </article>
+
+          }
+
+        </div>
+
+      }
+
+    </section>
+
+  </main>
+
+</div>

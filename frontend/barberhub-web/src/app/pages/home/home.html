@@ -1,0 +1,203 @@
+<header>
+  <nav>
+
+    <!-- LOGO -->
+    <a href="/" class="logo">
+      BarberHub
+    </a>
+
+    <!-- NAVEGACIÓN -->
+    <div class="nav-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#barberos">Barberos</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+
+    <!-- RESERVAR -->
+    <button routerLink="/reservar">
+      Reservar cita
+    </button>
+
+  </nav>
+</header>
+
+
+<main>
+
+  <!-- HERO / INICIO -->
+  <section id="inicio">
+
+    <span class="hero-label">
+      BARBERHUB
+    </span>
+
+    <h1>
+      Tu próximo corte empieza aquí.
+    </h1>
+
+    <p>
+      Elige tu servicio, selecciona tu barbero
+      y reserva tu cita en pocos minutos.
+    </p>
+
+    <button routerLink="/reservar">
+      Reservar cita
+    </button>
+
+  </section>
+
+
+  <!-- SERVICIOS -->
+  <section id="servicios">
+
+    <span class="section-label">
+      SERVICIOS
+    </span>
+
+    <h2>
+      Nuestros servicios
+    </h2>
+
+    <p>
+      Elige el servicio que mejor se adapte a tu estilo.
+    </p>
+
+    <div class="services-grid">
+
+      @for (service of services; track service.name) {
+
+        <mat-card class="service-card">
+
+          <mat-card-header>
+
+            <mat-icon mat-card-avatar>
+              {{ service.icon }}
+            </mat-icon>
+
+            <mat-card-title>
+              {{ service.name }}
+            </mat-card-title>
+
+          </mat-card-header>
+
+          <mat-card-content>
+
+            <p>
+              {{ service.description }}
+            </p>
+
+            <span class="price">
+              L {{ service.price }}
+            </span>
+
+          </mat-card-content>
+
+        </mat-card>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- BARBEROS -->
+  <section id="barberos">
+
+    <span class="section-label">
+      NUESTRO EQUIPO
+    </span>
+
+    <h2>
+      Nuestros barberos
+    </h2>
+
+    <p>
+      Conoce a nuestro equipo y elige con quién quieres reservar.
+    </p>
+
+    <div class="barbers-grid">
+
+      @for (barber of barbers; track barber.name) {
+
+        <mat-card class="barber-card">
+
+          <mat-card-header>
+
+            <mat-icon mat-card-avatar>
+              person
+            </mat-icon>
+
+            <mat-card-title>
+              {{ barber.name }}
+            </mat-card-title>
+
+          </mat-card-header>
+
+          <mat-card-content>
+
+            <p>
+              {{ barber.specialty }}
+            </p>
+
+          </mat-card-content>
+
+        </mat-card>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- LLAMADO A RESERVAR -->
+ 
+
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+
+    <div class="contact-content">
+
+      <div>
+
+        <span class="contact-label">
+          CONTACTO
+        </span>
+
+        <h2>
+          Tu barbería, a un clic de distancia.
+        </h2>
+
+        <p>
+          Reserva tu cita en línea y evita esperar por un espacio disponible.
+        </p>
+
+      </div>
+
+      <div class="contact-info">
+
+        <p>
+          <mat-icon>location_on</mat-icon>
+          San Pedro Sula, Honduras
+        </p>
+
+        <p>
+          <mat-icon>schedule</mat-icon>
+          Lunes a sábado
+        </p>
+
+        <p>
+          <mat-icon>phone</mat-icon>
+          +504 0000-0000
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>

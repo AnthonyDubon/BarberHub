@@ -1,0 +1,176 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.booking-page {
+  min-height: 100vh;
+  padding: 60px 24px 80px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f8fafc 0%,
+      #eef2f7 100%
+    );
+}
+
+.booking-container {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.booking-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.booking-label {
+  display: inline-block;
+  margin-bottom: 12px;
+
+  color: #c8102e;
+
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.booking-header h1 {
+  margin: 0;
+
+  color: #0b2a5b;
+
+  font-size: 44px;
+  line-height: 1.1;
+}
+
+.booking-header p {
+  max-width: 520px;
+  margin: 16px auto 0;
+
+  color: #64748b;
+
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* FORMULARIO */
+
+.booking-form {
+  padding: 36px;
+
+  background-color: #ffffff;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+
+  box-shadow:
+    0 12px 35px rgba(15, 23, 42, 0.08);
+}
+
+.form-section {
+  margin-bottom: 28px;
+}
+
+.form-section h2 {
+  margin: 0 0 18px;
+
+  color: #0b2a5b;
+
+  font-size: 18px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+/* BOTÓN */
+
+.submit-button {
+  width: 100%;
+  min-height: 52px;
+  margin-top: 4px;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* AYUDA HORARIOS */
+
+.time-help {
+  margin: -8px 0 0;
+
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+/* MENSAJES */
+
+.message {
+  margin-bottom: 24px;
+  padding: 18px 20px;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+
+  border-radius: 12px;
+}
+
+.message mat-icon {
+  flex-shrink: 0;
+}
+
+.message strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.message p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.success-message {
+  color: #166534;
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+
+.error-message {
+  color: #991b1b;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+
+  .booking-page {
+    padding: 40px 18px 60px;
+  }
+
+  .booking-header h1 {
+    font-size: 34px;
+  }
+
+  .booking-form {
+    padding: 24px 18px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+}

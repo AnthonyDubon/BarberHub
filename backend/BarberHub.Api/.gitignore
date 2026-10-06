@@ -1,0 +1,6 @@
+# Firebase credentials
+firebase-credentials.json
+
+# .NET generated files
+bin/
+obj/

@@ -1,0 +1,140 @@
+<div class="login-page">
+
+  <div class="login-card">
+
+    <div class="brand">
+
+      <div class="brand-icon">
+        <mat-icon>content_cut</mat-icon>
+      </div>
+
+      <h1>BarberHub</h1>
+
+      <p>
+        Panel de administración
+      </p>
+
+    </div>
+
+
+    @if (errorMessage) {
+
+      <div class="error-message">
+
+        <mat-icon>error_outline</mat-icon>
+
+        {{ errorMessage }}
+
+      </div>
+
+    }
+
+
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="login()"
+    >
+
+      <mat-form-field
+        appearance="outline"
+        class="full-width"
+      >
+
+        <mat-label>
+          Correo electrónico
+        </mat-label>
+
+        <mat-icon matPrefix>
+          email
+        </mat-icon>
+
+        <input
+          matInput
+          type="email"
+          formControlName="email"
+          autocomplete="email"
+        >
+
+      </mat-form-field>
+
+
+      <mat-form-field
+        appearance="outline"
+        class="full-width"
+      >
+
+        <mat-label>
+          Contraseña
+        </mat-label>
+
+        <mat-icon matPrefix>
+          lock
+        </mat-icon>
+
+        <input
+          matInput
+          [type]="hidePassword ? 'password' : 'text'"
+          formControlName="password"
+          autocomplete="current-password"
+        >
+
+
+        <button
+          matIconButton
+          matSuffix
+          type="button"
+          (click)="hidePassword = !hidePassword"
+        >
+
+          <mat-icon>
+
+            {{
+              hidePassword
+                ? 'visibility'
+                : 'visibility_off'
+            }}
+
+          </mat-icon>
+
+        </button>
+
+      </mat-form-field>
+
+
+      <button
+        matButton="filled"
+        class="login-button"
+        type="submit"
+        [disabled]="loading"
+      >
+
+        @if (loading) {
+
+          Iniciando sesión...
+
+        } @else {
+
+          <mat-icon>login</mat-icon>
+
+          Iniciar sesión
+
+        }
+
+      </button>
+
+    </form>
+
+
+    <div class="login-footer">
+
+      <mat-icon>shield</mat-icon>
+
+      <span>
+        Acceso exclusivo para administración
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
