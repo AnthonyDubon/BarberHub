@@ -1,34 +1,34 @@
-using System.Text;
+﻿using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuración JWT
+// ConfiguraciÃ³n JWT
 string jwtKey =
     builder.Configuration["Jwt:Key"]
     ?? throw new InvalidOperationException(
-        "Jwt:Key no está configurado."
+        "Jwt:Key no estÃ¡ configurado."
     );
 
 string jwtIssuer =
     builder.Configuration["Jwt:Issuer"]
     ?? throw new InvalidOperationException(
-        "Jwt:Issuer no está configurado."
+        "Jwt:Issuer no estÃ¡ configurado."
     );
 
 string jwtAudience =
     builder.Configuration["Jwt:Audience"]
     ?? throw new InvalidOperationException(
-        "Jwt:Audience no está configurado."
+        "Jwt:Audience no estÃ¡ configurado."
     );
 
 // Controllers y OpenAPI
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
-// Autenticación JWT
+// AutenticaciÃ³n JWT
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -53,7 +53,7 @@ builder.Services
             };
     });
 
-// Autorización
+// AutorizaciÃ³n
 builder.Services.AddAuthorization();
 
 // CORS para Angular
@@ -62,7 +62,11 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowAngularDev", policy =>
     {
         policy
-            .WithOrigins("http://localhost:4200")
+            .WithOrigins(
+                "http://localhost:4200",
+                "https://barberhub-1f779.web.app",
+                "https://barberhub-1f779.firebaseapp.com"
+            )
             .AllowAnyHeader()
             .AllowAnyMethod();
     });

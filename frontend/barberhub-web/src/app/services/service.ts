@@ -1,6 +1,7 @@
-import { Injectable, inject } from '@angular/core';
+﻿import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface ShopService {
   id: string;
@@ -26,7 +27,7 @@ export class ServiceService {
   private http = inject(HttpClient);
 
   private apiUrl =
-    'http://localhost:5139/api/Services';
+    `${environment.apiUrl}/Services`;
 
   getServices(): Observable<ShopService[]> {
     return this.http.get<ShopService[]>(this.apiUrl);
@@ -65,3 +66,4 @@ export class ServiceService {
     );
   }
 }
+

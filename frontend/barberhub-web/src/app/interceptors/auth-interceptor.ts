@@ -1,3 +1,4 @@
+﻿import { environment } from '../../environments/environment';
 import { inject } from '@angular/core';
 
 import {
@@ -37,7 +38,7 @@ export const authInterceptor:
 
 
     const backendUrl =
-      'http://localhost:5139/api/';
+      `${environment.apiUrl}/`;
 
 
     const isBackendRequest =
@@ -49,13 +50,13 @@ export const authInterceptor:
     let request = req;
 
 
-    // Si tenemos token y la petición
+    // Si tenemos token y la peticiÃ³n
     // pertenece a nuestro backend,
     // enviamos Authorization.
     //
-    // Las rutas públicas NO requieren
-    // token, así que siguen funcionando
-    // aunque el cliente no tenga sesión.
+    // Las rutas pÃºblicas NO requieren
+    // token, asÃ­ que siguen funcionando
+    // aunque el cliente no tenga sesiÃ³n.
 
     if (
       token &&
@@ -87,12 +88,12 @@ export const authInterceptor:
           ) => {
 
             /*
-             * Solo cerramos la sesión
-             * por 401 si había token.
+             * Solo cerramos la sesiÃ³n
+             * por 401 si habÃ­a token.
              *
-             * Así un posible 401 del
+             * AsÃ­ un posible 401 del
              * login no provoca comportamientos
-             * extraños.
+             * extraÃ±os.
              */
 
             if (
